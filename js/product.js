@@ -12,9 +12,7 @@ async function fetchJacketId (){
     try {
         const response = await fetch("https://api.noroff.dev/api/v1/rainy-days");
         dataResult = await response.json();
-        console.log(dataResult);
         jacketData = dataResult
-        console.log(jacketData);
         for(let i = 0; i < jacketData.length; i++){
             if(jacketData[i].id === idJacket){
                 displayJacket(jacketData[i])
@@ -55,19 +53,22 @@ async function fetchJacketId (){
                 </div>`}
 };
 
-addMeToCart.addEventListener("click", ()=> {
-    saveToLocalStorage();
+addMeToCart.addEventListener("click", () => {
+    const selectedJacket = jacketData.find(jacket => jacket.id === idJacket);
+    if (selectedJacket) {
+        saveToLocalStorage(selectedJacket);
+    }
 });
 
-function saveToLocalStorage(){
-    let saveData = idJacket
-    if (localStorage.getItem(`data`) === null){
-        localStorage.setItem(`data`, `[]`)
+function saveToLocalStorage(selectedJacket) {
+    if (localStorage.getItem("cartItems") === null) {
+        localStorage.setItem("cartItems", "[]");
     }
-    let oldData = JSON.parse(localStorage.getItem(`data`));
-    oldData.push(saveData)
-    localStorage.setItem(`data`, JSON.stringify(oldData))
+    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    cartItems.push(selectedJacket);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
+
 
 // Gamle måten jeg pusha til kart på.
 // let cart = [];
