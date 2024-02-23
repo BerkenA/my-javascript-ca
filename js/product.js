@@ -33,7 +33,7 @@ async function fetchJacketId() {
         cartButton.style.display = "none";
     }
 }
-
+console.log(jacketData)
 
     fetchJacketId();
 
