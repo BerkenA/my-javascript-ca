@@ -3,25 +3,37 @@ const paramUrl = new URLSearchParams(queryString);
 const idJacket = paramUrl.get("id");
 const jacketsContainer = document.querySelector(".displayMyJackets");
 const addMeToCart = document.querySelector(".addToBasket")
+const content = document.querySelector(".displayMyJackets")
+const cartButton = document.querySelector(".cartAnchor")
 
 let jacketData = [];
-let dataResult = [];
 
 
-async function fetchJacketId (){
+async function fetchJacketId() {
     try {
         const response = await fetch("https://api.noroff.dev/api/v1/rainy-days");
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
         dataResult = await response.json();
-        jacketData = dataResult
-        for(let i = 0; i < jacketData.length; i++){
-            if(jacketData[i].id === idJacket){
-                displayJacket(jacketData[i])
+        jacketData = dataResult;
+        let found = false;
+        for (let i = 0; i < jacketData.length; i++) {
+            if (jacketData[i].id === idJacket) {
+                displayJacket(jacketData[i]);
+                found = true;
+                break;
             }
         }
+        if (!found) {
+            content.innerHTML = "Jacket not found";
+        }
+    } catch (error) {
+        content.innerHTML = "Error fetching data: " + error.message;
+        cartButton.style.display = "none";
     }
-    catch (error){
-        console.log("couldnt fetch API", error);
-    }};
+}
+
 
     fetchJacketId();
 
@@ -42,7 +54,7 @@ async function fetchJacketId (){
                 jacketsContainer.innerHTML = `
                 <div>
                     <h2>${jacketData.title}</h2>
-                    <img src="${jacketData.image}" />
+                    <img src="${jacketData.image}"/>
                     <p>${jacketData.description}</p>
                     <p>${jacketData.gender}</p>
                     <p>${jacketData.sizes}</p>

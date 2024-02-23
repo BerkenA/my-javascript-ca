@@ -1,6 +1,7 @@
 fetchJackets();
 // Move to system memory local storage
 let cart = [];
+const filterItems = []; 
 
 function addToCart(jacketID) {
     cart.push(jacketID);
@@ -23,7 +24,6 @@ async function fetchJackets() {
         <img src=${jacket.image}\>
         <p class="formerPrice">${jacket.price}</p>
         <p class="discountPrice">${jacket.discountedPrice}</p>
-        </div>
         </a> `;
     }
     if (jacket.onSale === false) {
@@ -32,7 +32,6 @@ async function fetchJackets() {
         <div id=${jacket.id}>
         <h2>${jacket.title}</h2>
         <img src=${jacket.image}\>
-
         <p class="newPrice">${jacket.price}</p>
         </div>
         </a> `;

@@ -2,14 +2,18 @@
     box-sizing: border-box;
 }
 
-img {
-    max-width: 25rem;
-}
-
 header {
     display: flex;
     justify-content: center;
     background-color: gray;
+}
+
+img {
+    max-width: 25rem;
+}
+
+a {
+    text-decoration: none;
 }
 
 .mainContainer {
