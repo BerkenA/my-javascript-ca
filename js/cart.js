@@ -1,4 +1,4 @@
-let jacketData = JSON.parse(localStorage.getItem(`cartItems`));
+let jacketData = JSON.parse(localStorage.getItem(`cartItems`)) || [];
 const jacketCart = document.querySelector(".cartProduct");
 
 console.log(jacketData);
@@ -22,6 +22,22 @@ function removeItem(index) {
     localStorage.setItem('cartItems', JSON.stringify(jacketData));
     jacketCart.innerHTML = "";
     displayJacket();
+    calculateTotal();
 }
 
 displayJacket();
+
+function calculateTotal() {
+    let total = 0;
+    jacketData.forEach((jacket) => {
+        if (!jacket.OnSale) {
+            total += jacket.price;
+        } else {
+            total += jacket.discountedPrice;
+        }
+    });
+    total = total.toFixed(2);
+    jacketCart.innerHTML += `<div class="totalSum"><h3>Total: ${total}</div>`;
+}
+
+calculateTotal();

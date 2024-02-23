@@ -1,8 +1,15 @@
 * {
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 header {
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+}
+
+footer {
     display: flex;
     justify-content: center;
     background-color: gray;
