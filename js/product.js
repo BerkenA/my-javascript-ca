@@ -33,7 +33,7 @@ async function fetchJacketId() {
         cartButton.style.display = "none";
     }
 }
-console.log(jacketData)
+
 
     fetchJacketId();
 
@@ -80,11 +80,3 @@ function saveToLocalStorage(selectedJacket) {
     cartItems.push(selectedJacket);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
-
-
-// Gamle måten jeg pusha til kart på.
-// let cart = [];
-// function addToCart(jacketID) {
-//     cart.push(jacketID);
-//     console.log(JSON.stringify(cart));
-// }
