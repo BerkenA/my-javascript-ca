@@ -34,7 +34,6 @@ async function fetchJacketId() {
     }
 }
 
-
     fetchJacketId();
 
     function displayJacket(jacketData){
