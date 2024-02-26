@@ -3,8 +3,7 @@ fetchJackets();
 let cart = [];
 
 function addToCart(jacketID) {
-    cart.push(jacketID);
-    console.log(JSON.stringify(cart));
+  cart.push(jacketID);
 }
 
 async function fetchJackets() {
@@ -19,29 +18,31 @@ fetchJackets();
 
 function renderJackets(jackets) {
   const content = document.querySelector(".mainContainer");
-  content.innerHTML = ""; // Clear previous content
+  content.innerHTML = "";
   jackets.forEach((jacket) => {
-      if (jacket.onSale === true) {
-          content.innerHTML += `
+    if (jacket.onSale === true) {
+      content.innerHTML += `
               <a href="product.html?id=${jacket.id}">
                   <h2>${jacket.title}</h2>
                   <img src="${jacket.image}" />
                   <p class="formerPrice">${jacket.price}</p>
                   <p class="discountPrice">${jacket.discountedPrice}</p>
               </a>`;
-      } else {
-          content.innerHTML += `
+    } else {
+      content.innerHTML += `
               <a href="product.html?id=${jacket.id}">
                   <h2>${jacket.title}</h2>
                   <img src="${jacket.image}" />
                   <p class="newPrice">${jacket.price}</p>
               </a>`;
-      }
+    }
   });
 }
 
 function filterByGender(gender) {
-  const genderJackets = jacketList.filter((jacket) => jacket.gender.toLowerCase() === gender.toLowerCase());
+  const genderJackets = jacketList.filter(
+    (jacket) => jacket.gender.toLowerCase() === gender.toLowerCase()
+  );
   renderJackets(genderJackets);
 }
 
